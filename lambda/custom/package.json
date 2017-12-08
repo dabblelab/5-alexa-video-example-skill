@@ -1,7 +1,7 @@
 {
-  "name": "skill-sample-nodejs-hello-world",
+  "name": "visual-escape-alexa-template",
   "version": "1.0.0",
-  "description": "Hello world sample skill",
+  "description": "Example skill template Amazon Echo Show.",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

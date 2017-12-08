@@ -5,11 +5,11 @@
         "en-US": {
           "summary": "A soothing 1-minute video to clear your mind and reenergize your soul.",
           "examplePhrases": [
-            "Alexa open visual escape",
-            "Alexa ask visual escape to take me away",
-            "Alexa tell visual escape to reenergize me"
+            "Alexa open visual escape template",
+            "Alexa ask visual escape template to take me away",
+            "Alexa tell visual escape template to reenergize me"
           ],
-          "name": "Visual Escape",
+          "name": "Visual Escape Template",
           "description": "A soothing 1-minute video to clear your mind and reenergize your soul.",
           "smallIconUri": "https://s3.amazonaws.com/cdn.dabblelab.com/img/skill-template-default-sm.png",
           "largeIconUri": "https://s3.amazonaws.com/cdn.dabblelab.com/img/skill-template-default-lg.png"
