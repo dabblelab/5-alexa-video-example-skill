@@ -1,0 +1,53 @@
+{
+  "skillManifest": {
+    "publishingInformation": {
+      "locales": {
+        "en-US": {
+          "summary": "A soothing 1-minute video to clear your mind and reenergize your soul.",
+          "examplePhrases": [
+            "Alexa open visual escape",
+            "Alexa ask visual escape to take me away",
+            "Alexa tell visual escape to reenergize me"
+          ],
+          "name": "Visual Escape",
+          "description": "A soothing 1-minute video to clear your mind and reenergize your soul.",
+          "smallIconUri": "https://s3.amazonaws.com/cdn.dabblelab.com/img/skill-template-default-sm.png",
+          "largeIconUri": "https://s3.amazonaws.com/cdn.dabblelab.com/img/skill-template-default-lg.png"
+        }
+      },
+      "isAvailableWorldwide": true,
+      "testingInstructions": "No special testing instructions.",
+      "category": "SELF_IMPROVEMENT",
+      "distributionCountries": []
+    },
+    "apis": {
+      "custom": {
+        "endpoint": {
+          "sourceDir": "lambda/custom"
+        },
+        "interfaces": [
+          {
+            "type": "RENDER_TEMPLATE"
+          },
+          {
+            "type": "VIDEO_APP"
+          }
+        ]
+      }
+    },
+    "manifestVersion": "1.0",
+    "privacyAndCompliance": {
+      "allowsPurchases": false,
+      "locales": {
+        "en-US": {
+          "termsOfUseUrl": "http://dabblelab.com/terms",
+          "privacyPolicyUrl": "http://dabblelab.com/privacy"
+        }
+      },
+      "isExportCompliant": true,
+      "containsAds": false,
+      "isChildDirected": false,
+      "usesPersonalInfo": false
+    }
+  }
+}
