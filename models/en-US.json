@@ -1,7 +1,7 @@
 {
   "interactionModel": {
     "languageModel": {
-      "invocationName": "visual escape template",
+      "invocationName": "videoapp starter",
       "intents": [
         {
           "name": "AMAZON.NavigateSettingsIntent"
