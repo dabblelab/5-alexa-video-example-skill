@@ -43,6 +43,9 @@
           "name": "AMAZON.StopIntent"
         },
         {
+          "name": "AMAZON.NavigateHomeIntent"
+        },
+        {
           "name": "PlayVideoIntent",
           "samples": [
             "play video",
