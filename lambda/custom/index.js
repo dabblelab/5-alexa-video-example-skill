@@ -1,68 +1,148 @@
-'use strict';
-var Alexa = require("alexa-sdk");
-const makePlainText = Alexa.utils.TextUtils.makePlainText;
-const makeImage = Alexa.utils.ImageUtils.makeImage;
+/* eslint-disable  func-names */
+/* eslint-disable  no-console */
 
-exports.handler = function(event, context) {
-  var alexa = Alexa.handler(event, context);
-  alexa.registerHandlers(handlers);
-  alexa.execute();
-};
+const Alexa = require('ask-sdk-core');
 
-var handlers = {
-  'LaunchRequest': function() {
-    this.emit('PlayVideoIntent');
+const BACKGROUND_IMAGE_URL = 'https://s3.amazonaws.com/cdn.dabblelab.com/img/echo-show-bg-blue.png',
+  VIDEO_URL = 'https://s3.amazonaws.com/media.dabblelab.com/video/visual-escape-01.mp4',
+  VIDEO_TITLE = "Video from pixabay.com",
+  VIDEO_SUBTITLE = "Used under Creative Commons.",
+  TITLE = 'Visual Escape',
+  TEXT = 'A 60-second virtual vacation for your brain. Please relax before the video loads.';
+
+const PlayVideoIntentHandler = {
+  canHandle(handlerInput) {
+    return handlerInput.requestEnvelope.request.type === 'LaunchRequest'
+      || (handlerInput.requestEnvelope.request.type === 'IntentRequest'
+        && handlerInput.requestEnvelope.request.intent.name === 'PlayVideoIntent');
   },
-  'PlayVideoIntent': function() {
+  handle(handlerInput) {
+    if (supportsDisplay(handlerInput)) {
 
-    if (this.event.context.System.device.supportedInterfaces.VideoApp) {
-      let builder = new Alexa.templateBuilders.BodyTemplate1Builder();
+      let backgroundImage = new Alexa.ImageHelper()
+        .withDescription(TITLE)
+        .addImageInstance(BACKGROUND_IMAGE_URL)
+        .getImage();
 
-      let template = builder.setTitle('Visual Escape')
-        .setBackgroundImage(makeImage('https://s3.amazonaws.com/cdn.dabblelab.com/img/echo-show-bg-blue.png'))
-        .setTextContent(makePlainText('A 1-minute visual vacation.'))
-        .build();
+      let primaryText = new Alexa.RichTextContentHelper()
+        .withPrimaryText(TEXT)
+        .getTextContent();
 
-      let meta = {
-        title: "Video from pixabay.com",
-        subtitle: "Used under creative commons."
+      let myTemplate = {
+        type: 'BodyTemplate1',
+        token: 'Welcome',
+        backButton: 'HIDDEN',
+        backgroundImage: backgroundImage,
+        title: TITLE,
+        textContent: primaryText,
       }
-      this.response.playVideo('https://s3.amazonaws.com/media.dabblelab.com/video/visual-escape-01.mp4', meta)
-        .renderTemplate(template);
+
+      handlerInput.responseBuilder
+        .addVideoAppLaunchDirective(VIDEO_URL, VIDEO_TITLE, VIDEO_SUBTITLE)
+        .addRenderTemplateDirective(myTemplate)
+        .withSimpleCard(TITLE, VIDEO_SUBTITLE);
 
     } else {
-      this.response.speak("The video cannot be played on your device. To watch this video, try launching this skill from an echo show device.");
+      handlerInput.responseBuilder
+        .withSimpleCard(TITLE, "This skill requires a device with the ability to play videos.")
+        .speak("The video cannot be played on your device. To watch this video, try launching this skill from an echo show device.");
     }
 
-    this.emit(':responseReady');
-  },
-  'AboutIntent': function() {
+    return handlerInput.responseBuilder
+      .getResponse();
 
-    if (this.event.context.System.device.supportedInterfaces.VideoApp) {
-      this.response.speak("The videos in this skill are used under creative commons and available from pixabay.com. To play the video say: watch video.")
-        .listen("To see a video say: watch video.");
-    } else {
-      this.response.speak("The video cannot be played on your device. To watch this video, try launching this skill from an echo show device.");
-    }
-
-    this.emit(':responseReady');
   },
-  'SessionEndedRequest': function() {
-    console.log('Session ended with reason: ' + this.event.request.reason);
-  },
-  'AMAZON.StopIntent': function() {
-    this.response.speak('Bye');
-    this.emit(':responseReady');
-  },
-  'AMAZON.HelpIntent': function() {
-    this.response.speak("You can say: 'watch video'");
-    this.emit(':responseReady');
-  },
-  'AMAZON.CancelIntent': function() {
-    this.response.speak('Bye');
-    this.emit(':responseReady');
-  },
-  'Unhandled': function() {
-    this.response.speak("Sorry, I didn't get that.");
-  }
 };
+
+const HelpIntentHandler = {
+  canHandle(handlerInput) {
+    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+      && handlerInput.requestEnvelope.request.intent.name === 'AMAZON.HelpIntent';
+  },
+  handle(handlerInput) {
+    const speechText = 'This skill just plays a video when it is started. It does not have any additional functionality.';
+
+    return handlerInput.responseBuilder
+      .speak(speechText)
+      .reprompt(speechText)
+      .getResponse();
+  },
+};
+
+const AboutIntentHandler = {
+  canHandle(handlerInput) {
+    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+      && handlerInput.requestEnvelope.request.intent.name === 'AboutIntent';
+  },
+  handle(handlerInput) {
+    const speechText = 'This is a video app starter template.';
+
+    return handlerInput.responseBuilder
+      .speak(speechText)
+      .reprompt(speechText)
+      .getResponse();
+  },
+};
+
+const CancelAndStopIntentHandler = {
+  canHandle(handlerInput) {
+    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+      && (handlerInput.requestEnvelope.request.intent.name === 'AMAZON.CancelIntent'
+        || handlerInput.requestEnvelope.request.intent.name === 'AMAZON.StopIntent');
+  },
+  handle(handlerInput) {
+    const speechText = 'Goodbye!';
+
+    return handlerInput.responseBuilder
+      .speak(speechText)
+      .getResponse();
+  },
+};
+
+const SessionEndedRequestHandler = {
+  canHandle(handlerInput) {
+    return handlerInput.requestEnvelope.request.type === 'SessionEndedRequest';
+  },
+  handle(handlerInput) {
+    console.log(`Session ended with reason: ${handlerInput.requestEnvelope.request.reason}`);
+
+    return handlerInput.responseBuilder.getResponse();
+  },
+};
+
+const ErrorHandler = {
+  canHandle() {
+    return true;
+  },
+  handle(handlerInput, error) {
+    console.log(`Error handled: ${error.message}`);
+
+    return handlerInput.responseBuilder
+      .speak('Sorry, I can\'t understand the command. Please say again.')
+      .reprompt('Sorry, I can\'t understand the command. Please say again.')
+      .getResponse();
+  },
+};
+
+function supportsDisplay(handlerInput) {
+  const hasDisplay =
+    handlerInput.requestEnvelope.context &&
+    handlerInput.requestEnvelope.context.System &&
+    handlerInput.requestEnvelope.context.System.device &&
+    handlerInput.requestEnvelope.context.System.device.supportedInterfaces &&
+    handlerInput.requestEnvelope.context.System.device.supportedInterfaces.Display;
+  return hasDisplay;
+}
+
+const skillBuilder = Alexa.SkillBuilders.custom();
+
+exports.handler = skillBuilder
+  .addRequestHandlers(
+    PlayVideoIntentHandler,
+    AboutIntentHandler,
+    HelpIntentHandler,
+    CancelAndStopIntentHandler,
+    SessionEndedRequestHandler
+  )
+  .addErrorHandlers(ErrorHandler)
+  .lambda();

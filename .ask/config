@@ -8,12 +8,13 @@
           "apis": {
             "custom": {
               "endpoint": {
-                "uri": "video-app-starter"
+                "uri": "ask-dabblelab-videoapp-starter-default"
               }
             }
           }
         }
-      }
+      },
+      "in_skill_products": []
     }
   }
 }

@@ -1,11 +1,15 @@
 {
-  "name": "visual-escape-alexa-template",
+  "name": "dabblelab-videoapp-starter",
   "version": "1.0.0",
-  "description": "Example skill template Amazon Echo Show.",
+  "description": "Basic Alexa Skill Template for creating a skill that plays a video.",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "author": "Dabble Lab",
+  "license": "ISC",
   "dependencies": {
-    "alexa-sdk": "^1.0.0"
+    "ask-sdk-core": "^2.0.0",
+    "ask-sdk-model": "^1.0.0"
   }
 }
