@@ -9,7 +9,7 @@
             "Alexa ask videoapp starter to take me away",
             "Alexa tell videoapp starter to reenergize me"
           ],
-          "name": "VideoApp Starter",
+          "name": "videoapp-starter",
           "description": "A soothing 1-minute video to clear your mind and reenergize your soul.",
           "smallIconUri": "https://s3.amazonaws.com/cdn.dabblelab.com/img/skill-template-default-sm.png",
           "largeIconUri": "https://s3.amazonaws.com/cdn.dabblelab.com/img/skill-template-default-lg.png"
