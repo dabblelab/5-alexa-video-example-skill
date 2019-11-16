@@ -4,7 +4,7 @@
 const Alexa = require('ask-sdk-core');
 
 const BACKGROUND_IMAGE_URL = 'https://s3.amazonaws.com/cdn.dabblelab.com/img/echo-show-bg-blue.png',
-  VIDEO_URL = 'https://s3.amazonaws.com/media.dabblelab.com/video/visual-escape-01.mp4',
+  VIDEO_URL = 'https://player.vimeo.com/external/373404692.hd.mp4?s=791fd3364e75aa26d01d3620ecd695500a0f3f4a&profile_id=174',
   VIDEO_TITLE = "Video from pixabay.com",
   VIDEO_SUBTITLE = "Used under Creative Commons.",
   TITLE = 'Visual Escape',
