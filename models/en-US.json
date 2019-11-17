@@ -1,7 +1,7 @@
 {
   "interactionModel": {
     "languageModel": {
-      "invocationName": "videoapp starter",
+      "invocationName": "template five",
       "intents": [
         {
           "name": "AMAZON.NavigateSettingsIntent"

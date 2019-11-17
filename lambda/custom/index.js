@@ -4,11 +4,11 @@
 const Alexa = require('ask-sdk-core');
 
 const BACKGROUND_IMAGE_URL = 'https://s3.amazonaws.com/cdn.dabblelab.com/img/echo-show-bg-blue.png',
-  VIDEO_URL = 'https://player.vimeo.com/external/373404692.hd.mp4?s=791fd3364e75aa26d01d3620ecd695500a0f3f4a&profile_id=174',
-  VIDEO_TITLE = "Video from pixabay.com",
-  VIDEO_SUBTITLE = "Used under Creative Commons.",
-  TITLE = 'Visual Escape',
-  TEXT = 'A 60-second virtual vacation for your brain. Please relax before the video loads.';
+  VIDEO_URL = 'https://player.vimeo.com/external/373749691.hd.mp4?s=e43554c91fc796a20f051dcb8b45a74d035a6daa&profile_id=174',
+  VIDEO_TITLE = "Dabble Lab Tutorial",
+  VIDEO_SUBTITLE = "Streaming a Video in an Alexa Skill",
+  TITLE = 'Template Five',
+  TEXT = `In this tutorial, you'll learn how to create an Alexa skill that streams a video.`;
 
 const PlayVideoIntentHandler = {
   canHandle(handlerInput) {
