@@ -1,5 +1,5 @@
 {
-  "name": "dabblelab-videoapp-starter",
+  "name": "alexa-video-example-skill",
   "version": "1.0.0",
   "description": "Basic Alexa Skill Template for creating a skill that plays a video.",
   "main": "index.js",
