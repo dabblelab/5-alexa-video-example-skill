@@ -5,11 +5,11 @@
         "en-US": {
           "summary": "A soothing 1-minute video to clear your mind and reenergize your soul.",
           "examplePhrases": [
-            "Alexa open videoapp starter",
-            "Alexa ask videoapp starter to take me away",
-            "Alexa tell videoapp starter to reenergize me"
+            "Alexa open template five",
+            "Alexa ask template five to take me away",
+            "Alexa tell template five to reenergize me"
           ],
-          "name": "videoapp-starter",
+          "name": "Template 5 - Video Example",
           "description": "A soothing 1-minute video to clear your mind and reenergize your soul.",
           "smallIconUri": "https://s3.amazonaws.com/cdn.dabblelab.com/img/skill-template-default-sm.png",
           "largeIconUri": "https://s3.amazonaws.com/cdn.dabblelab.com/img/skill-template-default-lg.png"
@@ -40,8 +40,8 @@
       "allowsPurchases": false,
       "locales": {
         "en-US": {
-          "termsOfUseUrl": "http://example.com/terms",
-          "privacyPolicyUrl": "http://example.com/privacy"
+          "termsOfUseUrl": "http://dabblelab.com/terms",
+          "privacyPolicyUrl": "http://dabblelab.com/privacy"
         }
       },
       "isExportCompliant": true,
