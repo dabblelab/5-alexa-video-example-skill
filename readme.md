@@ -1,4 +1,4 @@
-![](https://raw.githubusercontent.com/dabblelab/5-alexa-video-example-skill/master/assets/images/VideoApp%20Starter%20-%20Alexa%20Skill%20Template.png)
+![](https://raw.githubusercontent.com/rimmi21/5-alexa-video-example-skill/master/assets/images/image.png)
 
 # VideoApp Starter - Alexa Skill Template
 
