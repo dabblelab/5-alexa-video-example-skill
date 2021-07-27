@@ -9,30 +9,168 @@
             "Alexa ask template five to take me away",
             "Alexa tell template five to reenergize me"
           ],
-          "name": "Template 5 - Video Example",
+          "name": "video demo",
           "description": "A soothing 1-minute video to clear your mind and reenergize your soul.",
-          "smallIconUri": "https://s3.amazonaws.com/cdn.dabblelab.com/img/skill-template-default-sm.png",
-          "largeIconUri": "https://s3.amazonaws.com/cdn.dabblelab.com/img/skill-template-default-lg.png"
+          "smallIconUri": "file://assets/images/en-US_smallIconUri.png",
+          "largeIconUri": "file://assets/images/en-US_largeIconUri.png"
+        },
+        "en-CA": {
+          "summary": "A soothing 1-minute video to clear your mind and reenergize your soul.",
+          "examplePhrases": [
+            "Alexa open template five",
+            "Alexa ask template five to take me away",
+            "Alexa tell template five to reenergize me"
+          ],
+          "name": "video demo",
+          "description": "A soothing 1-minute video to clear your mind and reenergize your soul.",
+          "smallIconUri": "file://assets/images/en-CA_smallIconUri.png",
+          "largeIconUri": "file://assets/images/en-CA_largeIconUri.png"
+        },
+        "en-IN": {
+          "summary": "A soothing 1-minute video to clear your mind and reenergize your soul.",
+          "examplePhrases": [
+            "Alexa open template five",
+            "Alexa ask template five to take me away",
+            "Alexa tell template five to reenergize me"
+          ],
+          "name": "video demo",
+          "description": "A soothing 1-minute video to clear your mind and reenergize your soul.",
+          "smallIconUri": "file://assets/images/en-IN_smallIconUri.png",
+          "largeIconUri": "file://assets/images/en-IN_largeIconUri.png"
+        },
+        "en-AU": {
+          "summary": "A soothing 1-minute video to clear your mind and reenergize your soul.",
+          "examplePhrases": [
+            "Alexa open template five",
+            "Alexa ask template five to take me away",
+            "Alexa tell template five to reenergize me"
+          ],
+          "name": "video demo",
+          "description": "A soothing 1-minute video to clear your mind and reenergize your soul.",
+          "smallIconUri": "file://assets/images/en-AU_smallIconUri.png",
+          "largeIconUri": "file://assets/images/en-AU_largeIconUri.png"
+        },
+        "en-GB": {
+          "summary": "A soothing 1-minute video to clear your mind and reenergize your soul.",
+          "examplePhrases": [
+            "Alexa open template five",
+            "Alexa ask template five to take me away",
+            "Alexa tell template five to reenergize me"
+          ],
+          "name": "video demo",
+          "description": "A soothing 1-minute video to clear your mind and reenergize your soul.",
+          "smallIconUri": "file://assets/images/en-GB_smallIconUri.png",
+          "largeIconUri": "file://assets/images/en-GB_largeIconUri.png"
         }
       },
       "isAvailableWorldwide": true,
       "testingInstructions": "No special testing instructions.",
       "category": "SELF_IMPROVEMENT",
+      "automaticClonedLocale": {
+        "locales": [
+          {
+            "source": "en-US"
+          }
+        ]
+      },
       "distributionCountries": []
     },
     "apis": {
       "custom": {
         "endpoint": {
-          "sourceDir": "lambda/custom"
+          "uri": "arn:aws:lambda:us-east-1:325775800922:function:ef704cfb-0ebd-4ef3-9411-97d118428612:Release_0"
         },
         "interfaces": [
           {
-            "type": "RENDER_TEMPLATE"
+            "type": "VIDEO_APP"
           },
           {
-            "type": "VIDEO_APP"
+            "supportedViewports": [
+              {
+                "minHeight": 540,
+                "mode": "TV",
+                "shape": "RECTANGLE",
+                "maxHeight": 540,
+                "minWidth": 960,
+                "maxWidth": 960
+              },
+              {
+                "minHeight": 100,
+                "mode": "HUB",
+                "shape": "ROUND",
+                "maxHeight": 599,
+                "minWidth": 100,
+                "maxWidth": 599
+              },
+              {
+                "minHeight": 600,
+                "mode": "HUB",
+                "shape": "RECTANGLE",
+                "maxHeight": 959,
+                "minWidth": 960,
+                "maxWidth": 1279
+              },
+              {
+                "minHeight": 600,
+                "mode": "HUB",
+                "shape": "RECTANGLE",
+                "maxHeight": 1279,
+                "minWidth": 1280,
+                "maxWidth": 1920
+              },
+              {
+                "minHeight": 100,
+                "mode": "HUB",
+                "shape": "RECTANGLE",
+                "maxHeight": 599,
+                "minWidth": 960,
+                "maxWidth": 1279
+              },
+              {
+                "minHeight": 320,
+                "mode": "MOBILE",
+                "shape": "RECTANGLE",
+                "maxHeight": 1920,
+                "minWidth": 600,
+                "maxWidth": 959
+              },
+              {
+                "minHeight": 320,
+                "mode": "MOBILE",
+                "shape": "RECTANGLE",
+                "maxHeight": 1920,
+                "minWidth": 960,
+                "maxWidth": 1279
+              },
+              {
+                "minHeight": 320,
+                "mode": "MOBILE",
+                "shape": "RECTANGLE",
+                "maxHeight": 1920,
+                "minWidth": 1280,
+                "maxWidth": 1920
+              }
+            ],
+            "type": "ALEXA_PRESENTATION_APL"
           }
-        ]
+        ],
+        "regions": {
+          "EU": {
+            "endpoint": {
+              "uri": "arn:aws:lambda:eu-west-1:325775800922:function:ef704cfb-0ebd-4ef3-9411-97d118428612:Release_0"
+            }
+          },
+          "NA": {
+            "endpoint": {
+              "uri": "arn:aws:lambda:us-east-1:325775800922:function:ef704cfb-0ebd-4ef3-9411-97d118428612:Release_0"
+            }
+          },
+          "FE": {
+            "endpoint": {
+              "uri": "arn:aws:lambda:us-west-2:325775800922:function:ef704cfb-0ebd-4ef3-9411-97d118428612:Release_0"
+            }
+          }
+        }
       }
     },
     "manifestVersion": "1.0",
@@ -42,10 +180,26 @@
         "en-US": {
           "termsOfUseUrl": "http://dabblelab.com/terms",
           "privacyPolicyUrl": "http://dabblelab.com/privacy"
+        },
+        "en-CA": {
+          "termsOfUseUrl": "http://dabblelab.com/terms",
+          "privacyPolicyUrl": "http://dabblelab.com/privacy"
+        },
+        "en-IN": {
+          "termsOfUseUrl": "http://dabblelab.com/terms",
+          "privacyPolicyUrl": "http://dabblelab.com/privacy"
+        },
+        "en-AU": {
+          "termsOfUseUrl": "http://dabblelab.com/terms",
+          "privacyPolicyUrl": "http://dabblelab.com/privacy"
+        },
+        "en-GB": {
+          "termsOfUseUrl": "http://dabblelab.com/terms",
+          "privacyPolicyUrl": "http://dabblelab.com/privacy"
         }
       },
-      "isExportCompliant": true,
       "containsAds": false,
+      "isExportCompliant": true,
       "isChildDirected": false,
       "usesPersonalInfo": false
     }

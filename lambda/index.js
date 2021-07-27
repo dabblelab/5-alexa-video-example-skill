@@ -2,13 +2,9 @@
 /* eslint-disable  no-console */
 
 const Alexa = require('ask-sdk-core');
+const videoDocument = require('./video.json');
 
-const BACKGROUND_IMAGE_URL = 'https://s3.amazonaws.com/cdn.dabblelab.com/img/echo-show-bg-blue.png',
-  VIDEO_URL = 'https://player.vimeo.com/external/373749691.hd.mp4?s=e43554c91fc796a20f051dcb8b45a74d035a6daa&profile_id=174',
-  VIDEO_TITLE = "Dabble Lab Tutorial",
-  VIDEO_SUBTITLE = "Streaming a Video in an Alexa Skill",
-  TITLE = 'Template Five',
-  TEXT = `In this tutorial, you'll learn how to create an Alexa skill that streams a video.`;
+const VIDEO_TOKEN = 'VideoToken';
 
 const PlayVideoIntentHandler = {
   canHandle(handlerInput) {
@@ -17,41 +13,26 @@ const PlayVideoIntentHandler = {
         && handlerInput.requestEnvelope.request.intent.name === 'PlayVideoIntent');
   },
   handle(handlerInput) {
-    if (supportsDisplay(handlerInput)) {
-
-      let backgroundImage = new Alexa.ImageHelper()
-        .withDescription(TITLE)
-        .addImageInstance(BACKGROUND_IMAGE_URL)
-        .getImage();
-
-      let primaryText = new Alexa.RichTextContentHelper()
-        .withPrimaryText(TEXT)
-        .getTextContent();
-
-      let myTemplate = {
-        type: 'BodyTemplate1',
-        token: 'Welcome',
-        backButton: 'HIDDEN',
-        backgroundImage: backgroundImage,
-        title: TITLE,
-        textContent: primaryText,
-      }
-
-      handlerInput.responseBuilder
-        .addVideoAppLaunchDirective(VIDEO_URL, VIDEO_TITLE, VIDEO_SUBTITLE)
-        .addRenderTemplateDirective(myTemplate)
-        .withSimpleCard(TITLE, VIDEO_SUBTITLE);
-
-    } else {
-      handlerInput.responseBuilder
-        .withSimpleCard(TITLE, "This skill requires a device with the ability to play videos.")
-        .speak("The video cannot be played on your device. To watch this video, try launching this skill from an echo show device.");
+      let responseBuilder = handlerInput.responseBuilder;
+      let speakOutput = "";
+    if (Alexa.getSupportedInterfaces(handlerInput.requestEnvelope)['Alexa.Presentation.APL']){
+            
+            // Add the RenderDocument directive to the responseBuilder
+            responseBuilder.addDirective({
+                type: 'Alexa.Presentation.APL.RenderDocument',
+                token: VIDEO_TOKEN,
+                document: videoDocument,
+                });
+            // Tailor the speech for a device with a screen.
+            speakOutput += "In this tutorial, you'll learn how to create an Alexa skill that streams a video."
+        } else {
+            speakOutput += "Sorry, but your device doesn't support APL.."
+        }
+        return responseBuilder
+            .speak(speakOutput)
+            //.reprompt('add a reprompt if you want to keep the session open for the user to respond')
+            .getResponse();
     }
-
-    return handlerInput.responseBuilder
-      .getResponse();
-
-  },
 };
 
 const HelpIntentHandler = {

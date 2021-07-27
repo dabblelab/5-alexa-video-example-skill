@@ -1,0 +1,47 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "video demo",
+      "intents": [
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        },
+        {
+          "name": "PlayVideoIntent",
+          "slots": [],
+          "samples": [
+            "play video",
+            "watch video",
+            "start video",
+            "take me away",
+            "reenergize me"
+          ]
+        },
+        {
+          "name": "AboutIntent",
+          "slots": [],
+          "samples": [
+            "about",
+            "credits",
+            "info"
+          ]
+        }
+      ],
+      "types": []
+    }
+  },
+  "version": "4"
+}
