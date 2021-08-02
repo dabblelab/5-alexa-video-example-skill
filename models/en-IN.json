@@ -1,7 +1,7 @@
 {
   "interactionModel": {
     "languageModel": {
-      "invocationName": "video demo",
+      "invocationName": "video app",
       "intents": [
         {
           "name": "AMAZON.CancelIntent",
@@ -25,9 +25,7 @@
           "samples": [
             "play video",
             "watch video",
-            "start video",
-            "take me away",
-            "reenergize me"
+            "start video"
           ]
         },
         {
@@ -43,5 +41,5 @@
       "types": []
     }
   },
-  "version": "3"
+  "version": "2"
 }

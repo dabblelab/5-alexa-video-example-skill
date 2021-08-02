@@ -2,37 +2,62 @@
 /* eslint-disable  no-console */
 
 const Alexa = require('ask-sdk-core');
-const videoDocument = require('./video.json');
 
-const VIDEO_TOKEN = 'VideoToken';
+// Fill in your requirements here:
+
+const VIDEO_URL = 'https://player.vimeo.com/external/582036894.hd.mp4?s=dd1921cfee36c59f0c9179b6e820b8e03afcbee8&profile_id=174',
+  VIDEO_TITLE = "Sample Video",
+  VIDEO_SUBTITLE = "Streaming a Video in an Alexa Skill",
+  TITLE = 'Template Five',
+  TEXT = `In this tutorial, you'll learn how to create an Alexa skill that streams a video.`;
+
+const LaunchRequestHandler = {
+  canHandle(handlerInput) {
+    return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest';
+  },
+  handle(handlerInput) {
+    const speakOutput = 'Welcome to Video App Example. You can say, Play Video, to watch a sample Video! Thanks.';
+
+    return handlerInput.responseBuilder
+      .speak(speakOutput)
+      .reprompt(speakOutput)
+      .getResponse();
+  }
+};
 
 const PlayVideoIntentHandler = {
   canHandle(handlerInput) {
-    return handlerInput.requestEnvelope.request.type === 'LaunchRequest'
-      || (handlerInput.requestEnvelope.request.type === 'IntentRequest'
-        && handlerInput.requestEnvelope.request.intent.name === 'PlayVideoIntent');
+    return (handlerInput.requestEnvelope.request.type === 'IntentRequest'
+      && handlerInput.requestEnvelope.request.intent.name === 'PlayVideoIntent');
   },
   handle(handlerInput) {
-      let responseBuilder = handlerInput.responseBuilder;
-      let speakOutput = "";
-    if (Alexa.getSupportedInterfaces(handlerInput.requestEnvelope)['Alexa.Presentation.APL']){
-            
-            // Add the RenderDocument directive to the responseBuilder
-            responseBuilder.addDirective({
-                type: 'Alexa.Presentation.APL.RenderDocument',
-                token: VIDEO_TOKEN,
-                document: videoDocument,
-                });
-            // Tailor the speech for a device with a screen.
-            speakOutput += "In this tutorial, you'll learn how to create an Alexa skill that streams a video."
-        } else {
-            speakOutput += "Sorry, but your device doesn't support APL.."
-        }
-        return responseBuilder
-            .speak(speakOutput)
-            //.reprompt('add a reprompt if you want to keep the session open for the user to respond')
-            .getResponse();
+    //if (this.event.context.System.device.SupportedInterfaces.VideoApp) {
+    let responseBuilder = handlerInput.responseBuilder;
+    if (Alexa.getSupportedInterfaces(handlerInput.requestEnvelope)['VideoApp']) {
+
+      handlerInput.responseBuilder
+        .addDirective({
+          "type": "VideoApp.Launch",
+          "version": "1.0",
+          "videoItem": {
+            "source": VIDEO_URL,
+            "metadata": {
+              "title": TITLE,
+              "subtitle": VIDEO_SUBTITLE
+            }
+          }
+
+        })
+        .speak(TEXT)
+    } else {
+      handlerInput.responseBuilder
+        .speak("The video cannot be played on your device. To watch this video, try launching this skill from an echo show device.");
     }
+    return handlerInput.responseBuilder
+
+      .getResponse();
+
+  },
 };
 
 const HelpIntentHandler = {
@@ -105,20 +130,11 @@ const ErrorHandler = {
   },
 };
 
-function supportsDisplay(handlerInput) {
-  const hasDisplay =
-    handlerInput.requestEnvelope.context &&
-    handlerInput.requestEnvelope.context.System &&
-    handlerInput.requestEnvelope.context.System.device &&
-    handlerInput.requestEnvelope.context.System.device.supportedInterfaces &&
-    handlerInput.requestEnvelope.context.System.device.supportedInterfaces.Display;
-  return hasDisplay;
-}
-
 const skillBuilder = Alexa.SkillBuilders.custom();
 
 exports.handler = skillBuilder
   .addRequestHandlers(
+    LaunchRequestHandler,
     PlayVideoIntentHandler,
     AboutIntentHandler,
     HelpIntentHandler,
